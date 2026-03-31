@@ -17,3 +17,19 @@ jobs:
       - name: 清空所有文件
         run: |
           aws s3 rm s3://${{ secrets.R2_BUCKET_NAME }}/ --recursive --endpoint-url ${{ secrets.R2_ENDPOINT }} --region auto
+      - name: 发送邮件
+        uses: dawidd6/action-send-mail@v6
+        with:
+            server_address: ${{ secrets.EMAIL_STMP }}
+            server_port: 465
+            username: ${{ secrets.EMAIL_USERNAME }}
+            password: ${{ secrets.EMAIL_PASS_CODE }}
+            subject: ✅ R2存储清除通知，删除所有apk文件
+            to: ${{ secrets.SEND_PERSONS }}
+            from: LinkMe build actions
+            body: |
+              你好，LinkMe的仓库贡献者
+              ✅ 所有之前R2构建的APK已经被清空
+              ✅ 释放空间成功！
+              😊 祝你新的一天生活愉快！
+        

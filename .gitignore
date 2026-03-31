@@ -1,0 +1,84 @@
+# Flutter/Dart
+.dart_tool/
+/.packages
+/.flutter-plugins
+/.flutter-plugins-dependencies
+build/
+**/build/
+android/.gradle/
+ios/Pods/
+ios/Runner.xcworkspace/
+macos/Pods/
+windows/flutter/ephemeral/
+pubspec.lock
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Generated files
+*.log
+*.tmp
+*.swp
+
+# Others
+*.keystore
+*.jks
+.DS_Store
+# 严格的 .gitignore，仅保留源代码文件用于提交
+# 此文件忽略所有生成的构建产物、缓存、IDE 设置以及示例/测试/演示内容。
+# 保留源码目录，例如 lib/、android/app/src/、ios/Runner/ 以及 third_party 中的插件源码（但不保留其 example/ 目录）。
+
+## 构建与工具缓存
+.dart_tool/
+/build/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+
+## Android 平台相关
+/android/.gradle/
+/android/**/build/
+/android/local.properties
+/android/*.iml
+
+## iOS / macOS 平台相关
+/ios/Pods/
+/ios/Runner.xcworkspace/
+/ios/Flutter/Generated.xcconfig
+/ios/.symlinks/
+/macos/Pods/
+/macos/Flutter/Generated.xcconfig
+
+## 桌面平台临时目录
+/windows/flutter/ephemeral/
+/linux/flutter/ephemeral/
+
+## IDE 与编辑器配置
+.idea/
+*.iml
+.vscode/
+
+## 系统文件
+.DS_Store
+Thumbs.db
+
+## 日志、临时与备份文件
+*.log
+*.tmp
+*.swp
+*~
+*.bak
+
+## 示例、演示与测试（非干净源码的一部分）
+third_party/*/example/
+/example/
+!**/example/**/
+!**/example/**.kt
+test/
+
+## 可选：生成的或较大的资产目录（如需保留请删除对应规则）
+# assets/**/generated/
+
+## 保留包与源码清单（不要忽略）：pubspec.yaml、pubspec.lock、lib/、core/、shared/ 等

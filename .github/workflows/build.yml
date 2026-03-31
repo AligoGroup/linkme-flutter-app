@@ -1,0 +1,68 @@
+name: build Android APK
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - main #推送到main分支时触发构建
+jobs:
+  build:
+      runs-on: ubuntu-latest
+      steps:
+        - name: 拉取代码
+          uses: actions/checkout@v6
+          with:
+            lfs: true
+        # 自动提取提交信息，暴露邮箱等环境变量
+        - name: 提取Git提交信息
+          uses: rlespinasse/git-commit-data-action@v1.5.0
+        - name: 配置安卓sdk
+          uses: android-actions/setup-android@v3
+          with:
+            packages: ''
+            cmdline-tools-version: 14742923
+        - run: |
+            sdkmanager "platform-tools" "platforms;android-36" "ndk;27.0.12077973" "cmake;3.22.1"
+            yes | sdkmanager --licenses
+        - name: 配置flutter环境变量
+          uses: subosito/flutter-action@v2
+          with:
+            channel: stable
+            flutter-version: 3.41.5
+        - name: 检测flutter版本
+          run: |
+            flutter --version
+        - name: 安装依赖
+          run: |
+            flutter pub get
+        - name: 构建app安卓
+          run: |
+            flutter build apk --release
+        - name: 重命名安装包
+          run: |
+            NEW_NAME=app-release-${GITHUB_SHA::8}.apk
+            mv build/app/outputs/flutter-apk/app-release.apk $NEW_NAME
+            echo "APK_NAME=$NEW_NAME" >> $GITHUB_ENV
+        - name: 配置 R2 凭证
+          run: |
+            aws configure set aws_access_key_id ${{ secrets.R2_ACCESS_KEY_ID }}
+            aws configure set aws_secret_access_key ${{ secrets.R2_SECRET_ACCESS_KEY }}
+            aws configure set region auto
+         # 上传APK到R2存储桶
+        - name: 上传到Cloudflare R2
+          run: aws s3 cp ${{ env.APK_NAME }} s3://${{ secrets.R2_BUCKET_NAME }}/ --endpoint-url ${{ secrets.R2_ENDPOINT }} --region auto
+        - name: 发送邮件
+          uses: dawidd6/action-send-mail@v6
+          with:
+            server_address: ${{ secrets.EMAIL_STMP }}
+            server_port: 465
+            username: ${{ secrets.EMAIL_USERNAME }}
+            password: ${{ secrets.EMAIL_PASS_CODE }}
+            subject: ✅ Flutter 构建完成 - ${{ github.repository }}
+            to: ${{ env.GIT_COMMIT_COMMITTER_EMAIL }}
+            from: LinkMe build actions
+            body: |
+              你好，${{ github.actor }}！
+              构建已完成 🎉
+              下载链接为： ${{ secrets.DOWNLOAD_LINK }}/${{ env.APK_NAME }}
+              提交：${{ github.sha }}s

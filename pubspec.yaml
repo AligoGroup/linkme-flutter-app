@@ -1,0 +1,121 @@
+name: linkme_flutter
+description: A new Flutter project.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.11.3 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # UI
+  cupertino_icons: ^1.0.8
+  
+  # State Management
+  provider: ^6.1.2
+  
+  # Navigation
+  go_router: ^14.8.1
+  
+  # Network
+  dio: ^5.9.0
+  dio_web_adapter: ^2.1.1
+  # 6.x 在 pub.dev 标明 Dart >=3.2 & Flutter >=3.7，适配 Dart 3.11；避免 7.x 对 AGP/Gradle 的更高硬性要求
+  connectivity_plus: ^6.1.3
+  
+  # Location & Maps
+  geolocator: ^12.0.0
+  amap_flutter_base:
+    path: third_party/amap_flutter_base
+  amap_flutter_location:
+    path: third_party/amap_flutter_location
+  amap_flutter_map:
+    path: third_party/amap_flutter_map
+  
+  # Permissions
+  permission_handler: ^11.3.1
+  
+  # Storage
+  shared_preferences: ^2.3.4
+  
+  # WebView
+  webview_flutter: ^4.10.0
+  
+  # URL Launcher
+  url_launcher: ^6.3.1
+  
+  # Serialization
+  json_annotation: ^4.9.0
+  
+  # Utilities
+  # 与当前 Flutter stable 常用的 intl 0.20.x 对齐（pub.dev / Flutter 工具链趋势）
+  intl: ^0.20.2
+  uuid: ^4.5.1
+  sprintf: ^7.0.0
+
+  # Notifications & Badges
+  flutter_app_badger: ^1.5.0
+  flutter_local_notifications: ^18.0.1
+  
+  # Image Handling
+  image_picker: ^1.1.2
+  image_cropper: ^8.1.0 #8.0.2
+  flutter_image_compress: ^2.3.0
+  saver_gallery: ^4.1.0
+  photo_view: ^0.14.0
+  cached_network_image: ^3.4.1
+  http: ^1.2.2
+  lottie: ^3.1.2
+  
+  # Video Handling
+  # 0.5.5+ 含 Android namespace，与 AGP 8+ 兼容；仍保留根 build.gradle.kts 中的 namespace 回退
+  video_thumbnail: ^0.5.6
+  video_player: ^2.9.2
+  
+  # SVG Icons
+  flutter_svg: ^2.0.10+1
+  
+  # WebRTC for Audio/Video Calls（0.9.x 在 Flutter 3.29+ 下 Registrar 已移除会编译失败；需 >=0.12.9，建议 1.x）
+  flutter_webrtc: ^1.4.0
+  
+  # Audio Player for Ringtone
+  audioplayers: ^5.2.1
+  
+  # WebSocket
+  web_socket_channel: ^2.4.0
+  
+  # Socket.IO Client for mediasoup
+  socket_io_client: ^2.0.3+1
+  
+  # FFI for Native C/C++ integration
+  ffi: ^2.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  build_runner: ^2.8.0
+  json_serializable: ^6.9.2
+  flutter_launcher_icons: ^0.13.1
+  git_hooks: ^1.0.2
+  
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/icons/app_icons.png
+  adaptive_icon_background: '#FFFFFF'
+  adaptive_icon_foreground: assets/icons/app_icons.png
+  min_sdk_android: 21
+
+flutter:
+  uses-material-design: true
+  
+  assets:
+    - assets/
+    - assets/animations/
+    - assets/images/
+    - assets/icons/
+    - assets/app_icons/svg/
+    - assets/sounds/

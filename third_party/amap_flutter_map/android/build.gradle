@@ -1,0 +1,26 @@
+group 'com.amap.flutter.amap_flutter_map'
+version '1.0'
+
+apply plugin: 'com.android.library'
+
+android {
+    // AGP 8+ requires explicit namespace
+    namespace 'com.amap.flutter.map'
+    compileSdkVersion 34
+
+    defaultConfig {
+        minSdkVersion 21
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+}
+
+dependencies {
+    compileOnly 'com.amap.api:3dmap:8.1.0'
+}
+
+repositories {
+    google()
+    mavenCentral()
+}

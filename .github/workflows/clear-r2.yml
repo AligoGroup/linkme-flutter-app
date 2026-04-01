@@ -3,7 +3,7 @@ name: 每日清空 R2 存储桶 linkmeapk
 on:
   schedule:
     # 每天 UTC 0 点（北京时间 8 点）执行，如需北京时间 0 点改为 '0 16 * * *'
-    - cron: '00 00 * * *'
+    - cron : '00 00 * * *'
   workflow_dispatch: # 允许手动触发测试
 jobs:
   clear-r2:
